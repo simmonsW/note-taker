@@ -32,7 +32,28 @@ function createNewNote(body, notesArray) {
   );
 
   return note;
+};
+
+function findById(id, notesArray) {
+  const result = notesArray.filter(note => note.id === id)[0];
+  return result;
 }
+
+function deleteNote(id, notesArray) {
+  const selected = findById(id, notesArray);
+
+  if (selected) {
+    let index = notesArray.indexOf(notesArray[id]);
+    delete notesArray[id];
+    notesArray.splice(index, 1);
+    fs.writeFileSync(
+      path.join(__dirname, './db/db.json'),
+      JSON.stringify({ notes: notesArray }, null, 2)
+    );
+  } else {
+    console.log('no note with this id exists');
+  }
+};
 
 // API ROUTES
 
@@ -44,11 +65,34 @@ app.get('/api/notes', (req, res) => {
   res.json(results);
 });
 
+app.get('/api/notes/:id', (req, res) => {
+  const result = findById(req.params.id, notes);
+  if (result) {
+    res.json(result);
+  } else {
+    res.send(404);
+  }
+});
+
 app.post('/api/notes', (req, res) => {
-  req.body.id = notes.length.toString();
+  // expects "title" and "text"
+  // req.body.id = notes.length.toString();
+  let id = notes.length.toString();
+
+  if (notes.some(note => note.id === id)) {
+    id++;
+  }
+
+  req.body.id = id.toString();
 
   const note = createNewNote(req.body, notes);
   res.json(note);
+});
+
+app.delete('/api/notes/:id', (req, res) => {
+  deleteNote(req.params.id, notes);
+  console.log('Note has been deleted');
+  res.send(true);
 });
 
 // HTML ROUTES
