@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
-const { notes } = require('.db/db.json');
+const { notes } = require('./db/db.json');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -23,7 +23,7 @@ function filterByQuery(query, notesArray) {
   return filteredResults;
 };
 
-// ROUTES
+// API ROUTES
 
 app.get('/api/notes', (req, res) => {
   let results = notes;
@@ -32,6 +32,8 @@ app.get('/api/notes', (req, res) => {
   }
   res.json(results);
 });
+
+// HTML ROUTES
 
 app.get('/notes', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/notes.html'));
