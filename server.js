@@ -23,6 +23,17 @@ function filterByQuery(query, notesArray) {
   return filteredResults;
 };
 
+function createNewNote(body, notesArray) {
+  const note = body;
+  notesArray.push(note);
+  fs.writeFileSync(
+    path.join(__dirname, './db/db.json'),
+    JSON.stringify({ notes: notesArray }, null, 2)
+  );
+
+  return note;
+}
+
 // API ROUTES
 
 app.get('/api/notes', (req, res) => {
@@ -31,6 +42,13 @@ app.get('/api/notes', (req, res) => {
     results = filterByQuery(req.query, results);
   }
   res.json(results);
+});
+
+app.post('/api/notes', (req, res) => {
+  req.body.id = notes.length.toString();
+
+  const note = createNewNote(req.body, notes);
+  res.json(note);
 });
 
 // HTML ROUTES
