@@ -35,7 +35,7 @@ function createNewNote(body, notesArray) {
 };
 
 function findById(id, notesArray) {
-  const result = notesArray.filter(note => note.id === id);
+  const result = notesArray.filter(note => note.id === id)[0];
   return result;
 }
 
