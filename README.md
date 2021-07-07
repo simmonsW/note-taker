@@ -33,6 +33,6 @@
 
   ## Heroku Link
 
-  https://quiet-sea-27843.herokuapp.com/notes
+  https://quiet-sea-27843.herokuapp.com
   
   
