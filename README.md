@@ -11,7 +11,7 @@
   * [Heroku](#heroku-link)
     
   ## Description
-  This is a note taking application where users can add notes with a title and text, reselect and update notes, or even delete notes
+  This is a note taking application where users can add notes with a title and text, reselect and update notes, or even delete notes.  It uses an Express.js backend and will save and retrieve note data from a JSON file.
 
   ## Technologies used
   * HTML
