@@ -35,7 +35,7 @@ function createNewNote(body, notesArray) {
 };
 
 function findById(id, notesArray) {
-  const result = notesArray.filter(note => note.id === id)[0];
+  const result = notesArray.filter(note => note.id === id);
   return result;
 }
 
@@ -44,7 +44,7 @@ function deleteNote(id, notesArray) {
 
   if (selected) {
     let index = notesArray.indexOf(notesArray[id]);
-    delete notesArray[id];
+    // delete notesArray[id];
     notesArray.splice(index, 1);
     fs.writeFileSync(
       path.join(__dirname, './db/db.json'),
@@ -76,13 +76,8 @@ app.get('/api/notes/:id', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
   // expects "title" and "text"
+  let id = Math.floor(Math.random() * 1000);
   // req.body.id = notes.length.toString();
-  let id = notes.length.toString();
-
-  if (notes.some(note => note.id === id)) {
-    id++;
-  }
-
   req.body.id = id.toString();
 
   const note = createNewNote(req.body, notes);
