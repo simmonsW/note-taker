@@ -7,8 +7,8 @@
   * [Technologies used](#technologies-used)
   * [Installation](#installation)
   * [How to Use](#How-to-use)
-  * [Github] (#github-link)
-  * [Heroku] (#heroku-link)
+  * [Github](#github-link)
+  * [Heroku](#heroku-link)
     
   ## Description
   This is a note taking application where users can add notes with a title and text, reselect and update notes, or even delete notes
